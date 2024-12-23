@@ -1,10 +1,8 @@
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 body {
   font-family: Arial, sans-serif;
@@ -15,7 +13,6 @@ body {
   background-color: white;
 }
 
-
 .container {
   display: flex;
   width: 100%;
@@ -25,7 +22,6 @@ body {
   overflow: hidden;
   padding-left: 20px;
 }
-
 
 .image-section {
   display: flex;
@@ -38,7 +34,6 @@ body {
   border-radius: 30px;
   overflow: hidden; 
 }
-
 
 .slider {
   position: relative;
@@ -60,7 +55,6 @@ body {
   opacity: 1; 
 }
 
-/* Navigation Arrows */
 .arrow {
   position: absolute;
   top: 50%;
@@ -85,7 +79,6 @@ body {
   width: 50px;
 }
 
-
 .form-section {
   flex: 1;
   padding: 40px;
@@ -109,7 +102,6 @@ body {
   color: #777;
   text-align: center;
 }
-
 
 form {
   display: flex;
@@ -166,6 +158,6 @@ form button:hover {
   text-decoration: underline;
 }
 
-.sizeBox{
+.sizeBox {
   width: 12%;
 }
