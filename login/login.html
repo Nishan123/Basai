@@ -1,0 +1,40 @@
+<!-- Save this as login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Basai</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="image-section">
+            <div class="slider">
+              <img src="/assets/login1.png" alt="Image 1" class="active">
+              <img src="/assets/login2.png" alt="Image 2">
+              <img src="/assets/login3.png" alt="Image 3">
+              <button class="arrow left" onclick="changeImage(-1)">&#10094;</button>
+              <button class="arrow right" onclick="changeImage(1)">&#10095;</button>
+            </div>
+          </div>
+    <div class="sizeBox"></div>
+          
+        <div class="form-section">
+            <h1>Welcome Back ! </h1>
+            <h2>Basai. Explore . Stay . Relax</h2>
+            <form>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="extra">
+                <p>Don't have an account? <a href="/SignUp/Signup.html">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="/login/login.js"></script>
+</body>
+</html>
+
