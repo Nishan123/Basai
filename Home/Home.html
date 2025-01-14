@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basai - Explore Stay Relax</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="Home.css">
 </head>
 <body>
@@ -41,7 +42,7 @@
     </div>
 
     <div class="input-container" id="date">
-      <input type="date" placeholder="Check in Date - Check out Date" class="input-dates input-with-icon">
+      <input type="text" id="checkin-checkout" placeholder="    Check in Date - Check out Date" class="input-dates input-with-icon">
       <img src="/assets/icon/icons8-date.gif" class="icon" alt="date-icon">
       </div>
 
@@ -147,6 +148,7 @@
 
   </section>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="home.js"></script>
 </body>
 </html>
