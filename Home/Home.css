@@ -1,3 +1,28 @@
+/* Smooth scrollling to section of header  */
+
+html {
+  scroll-behavior: smooth;
+}
+
+.page-section {
+  display: none; /* Hide all sections by default */
+}
+
+.page-section.active {
+  display: block; /* Show the active section */
+}
+
+/* Optional: Style for the active link */
+.nav__link.active {
+  color: #FF5722; /* Change the color of the active link */
+  font-weight: bold; /* Make it bold */
+}
+
+h2 {
+  text-align: left;
+}
+
+
 
 body {
     margin: 0;
@@ -123,11 +148,17 @@ body {
     border: 1px solid #ccc;
   }
   
-  /* .input-location,
+  .input-location,
   .input-dates,
   .input-people {
     flex: 1;
-  } */
+  }
+  
+  .active {
+    font-weight: bold;
+    color: #fefbfa; /* Example color */
+  }
+  
   
   .search-button {
     background-color: #5566FF;
@@ -233,11 +264,11 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
   }
-  /* .prashant p {
+  .prashant p {
     margin-top: 10px;
     font-size: 0.85rem;
     font-weight: bold;
-  } */
+  }
 
   .price-container {
     display: flex;
