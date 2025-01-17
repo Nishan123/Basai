@@ -89,6 +89,7 @@ body {
     text-align: center;
     color: white;
     padding: 50px 20px;
+    
   }
   
   .hero-text h1 {
@@ -112,7 +113,6 @@ body {
     margin: auto;
     width: fit-content;
     border-radius: 7px;
-
   }
   
   .search-bar input,
