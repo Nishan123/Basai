@@ -388,8 +388,7 @@ body {
   gap: 10px;
   padding: 20px;
   border: 1px solid #eaeaea;
-  border-radius: 10px;
-  
+ 
   font-family: Arial, sans-serif;
   position: relative; /* Enables absolute positioning of child elements */
 }
@@ -399,23 +398,22 @@ body {
 }
 
 .main-image img {
+
   width: 400px;
   height: 300px;
   border-radius: 8px;
-  object-fit: cover;
+  
 }
 
 .description-container {
   margin: 20px;
-  margin-bottom: 165px;
+  margin-bottom: 70px;
   position: absolute;
   bottom: 10px;
   left: 650px; /* Moves it further to the left */
   background: rgba(255, 255, 255, 0.9);
   padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  max-width: 45%;
+  max-width: 50%;
 }
 
 .property-header {
@@ -424,13 +422,14 @@ body {
 }
 
 .location {
-  color: #ffa500;
+  color: #ff0000;
 }
 
 .property-location {
   font-size: 14px;
   margin-bottom: 10px;
 }
+
 
 .property-description {
   font-size: 14px;
@@ -478,4 +477,37 @@ body {
   padding: 5px;
   background: #f0f0f0;
   border-radius: 5px;
+}
+
+
+.property-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feature-icon i {
+  font-size: 18px;
+  color: #4f46e5;
+}
+
+.feature-box {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+ 
+  border-radius: 2px;
+  margin-right: 5px;
+}
+
+.feature-text {
+  font-size: 14px;
+  color: #555;
 }
