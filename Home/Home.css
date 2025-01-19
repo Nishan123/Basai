@@ -285,3 +285,101 @@ body {
     margin: 0; 
 }
 
+
+
+/* For Sprint 3  */
+.carousel-container {
+  text-align: center;
+  margin: 20px auto;
+  width: 70%;
+}
+.main-image img {
+  display: block;
+  margin: 30px;
+  margin-left: 200px;
+  padding: auto;
+  width: 500px;
+  height: 300px;
+  border-radius: 20px;
+}
+.main-image{
+  flex: 1;
+}
+.thumbnail-container {
+  margin-left: 200px;
+  padding: 10px;
+  display: flex;
+  justify-content: left;
+  gap: 10px;
+  margin-top: 10px;
+  
+}
+.thumbnail {
+  width: 80px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.more-images {
+  font-size: 14px;
+  color: #555;
+}
+.booking-details {
+  padding: 20px;
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  border-radius: 10px;
+  width: 60%;
+  margin: 20px auto;
+  text-align: center;
+}
+.booking-details input,
+.booking-details button {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.booking-details button {
+  background-color: #4f46e5;
+  color: white;
+  cursor: pointer;
+}
+.details-header {
+  margin-bottom: 15px;
+}
+.property-description {
+  padding: 20px;
+  text-align: left;
+  margin: 0 auto;
+  width: 70%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9fafb;
+}
+.property-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.property-location,
+.property-features,
+.property-price {
+  margin: 5px 0;
+}
+.book-now-button {
+  background-color: #2563eb;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+
+/* //  rough  */

@@ -4,3 +4,8 @@ const navLinks = document.querySelectorAll('nav a').forEach(link=>{
     link.classList.add('active');
   }
 })
+
+// It for Image Banner 
+function changeImage(imageSrc) {
+  document.getElementById('main-image').src = imageSrc;
+}
