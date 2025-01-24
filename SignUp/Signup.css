@@ -1,129 +1,181 @@
-
 .container {
-    display: flex;
-    height: 100vh;
-    font-family: Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  margin: 20px 50px;
+  gap: 23px;
+}
+
+.leftContainer {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.basaiIcon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 5rem; 
+  height: auto;
+  z-index: 10; 
+}
+.slider {
+  display: flex;
+  width: 400%; 
+  height: 100%;
+  animation: slide 14s infinite ease-in-out; 
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(0); } 
+  30% { transform: translateX(-50%); }
+  50% { transform: translateX(-50%); } 
+  55% { transform: translateX(-100%); }
+  75% { transform: translateX(-100%); } 
+  80% { transform: translateX(-200%); }
+  85% { transform: translateX(-200%); }
+  95% { transform: translateX(-100%); }
+  100% { transform: translateX(-100%); } 
+}
+
+.slide {
+  flex-shrink: 0;
+  width: calc(100% / 3); 
+  height: 100%; 
+  object-fit: cover; 
+  background-size: cover; 
+  background-position: center center;
+}
+
+.caption {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.rightContainer {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #fff;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #777;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 7px;
+}
+
+.sub-title {
+  color: black;
+  font-size: 1.5rem;
+}
+
+.form {
+  width: 100%;
+}
+
+.inputRow {
+  display: flex;
+  gap: 5px;
+}
+
+.input {
+  width: 96%;
+  padding: 13px;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #ccc;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkboxLabel {
+  margin-left: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.button {
+  width: 100%;
+  padding: 13px;
+  background-color: #5A67D8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.footerText {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.link {
+  color: #5A67D8;
+  text-decoration: none;
+}
+
+.link:hover {
+  font-size: medium;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+      margin: 10px 20px;
   }
-  
-  .leftContainer {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .icon {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 62px;
-    height: 43px;
-    cursor: pointer;
-  }
-  
-  .tagline {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
+
+  .leftContainer,
   .rightContainer {
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: #fff;
+      flex: none;
+      width: 100%;
   }
-  
-  .title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+
+  .rightContainer {
+      padding: 20px;
   }
-  
-  .subtitle {
-    font-size: 1rem;
-    color: #777;
-    margin-bottom: 30px;
-  }
-  
-  .form {
-    width: 100%;
-  }
-  
-  .inputRow {
-    display: flex;
-    margin-bottom: 15px;
-    gap: 6px;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-  }
-  
-  .checkboxContainer {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .checkboxLabel {
-    margin-left: 10px;
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  .button {
-    width: 100%;
-    padding: 10px;
-    background-color: #5A67D8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  
-  .footerText {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  .link {
-    color: #5A67D8;
-    text-decoration: none;
-  }
-  .link:hover {
-    font-size: medium;
-  }
-  
-  .continueButton {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white;
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
-  
-  .continueButton:hover{
-    background-color: #5A67D8;
-    color: white;
-  }
+}
+
+
+.continueButton {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.continueButton:hover{
+  background-color: #5A67D8;
+  color: white;
+}

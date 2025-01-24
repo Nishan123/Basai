@@ -9,12 +9,12 @@
 <body>
   <header class="navbar">
     <div class="nav-1">
-    <div class="logo"><img src="/Basai/assets/basaiIcon.png" alt="Basai-Icon"></div>
+    <div class="logo"><img src="/assets/basaiIcon.png" alt="Basai-Icon"></div>
   </div>
   <div class="auth-buttons">
       <!-- <h3>List your property</h3> -->
-      <a href="/Basai/SignUp/Signup.html" class="register">Register</a>
-      <a href="#" class="sign-in">Sign in</a>
+      <a href="/SignUp/Signup.html" class="register">Register</a>
+      <a href="/login/login.html" class="sign-in">Sign in</a>
     </div>
   </div>
 
@@ -37,44 +37,54 @@
 
       <div class="input-container" id="location">
       <input type="text" placeholder="Where are you going?" class="input-location input-with-icon">
-      <img src="/Basai/assets/icon/icons8-car.gif" class="icon" alt="Car-icon">
+      <img src="/assets/icon/icons8-car.gif" class="icon" alt="Car-icon">
     </div>
 
     <div class="input-container" id="date">
       <input type="text" placeholder="Check in Date - Check out Date" class="input-dates input-with-icon">
-      <img src="/Basai/assets/icon/icons8-date.gif" class="icon" alt="date-icon">
+      <img src="/assets/icon/icons8-date.gif" class="icon" alt="date-icon">
       </div>
 
       <div class="input-container">
       <input type="number" placeholder="Number of people" class="input-people input-with-icon">
-      <img src="/Basai/assets/icon/icons8-crowd-30.png" class="icon" alt="crowd-icon">
+      <img src="/assets/icon/icons8-crowd-30.png" class="icon" alt="crowd-icon">
       </div>
       <button class="search-button">Search</button>
     </div>
   </section>
 
   <section class="trending-section">
+    <div class="trending-cities-main">
     <h2>Trending Cities</h2>
     <div class="trending-cities">
       <div class="city">
-        <img src="/Basai/assets/pokhara.jpeg" alt="Pokhara">
-        <p>Pokhara, Nepal</p>
+        <img src="/assets/pokhara.jpeg" alt="Pokhara">
+        <div class="nepal" style="display: flex;"><p><b>Pokhara .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.5rem;">Nepal</div> 
+        </div>
       </div>
       <div class="city">
-        <img src="/Basai/assets/kathmandu.jpeg" alt="Kathmandu">
-        <p>Kathmandu, Nepal</p>
+        <img src="/assets/kathmandu.jpeg" alt="Kathmandu">
+        <div class="nepal" style="display: flex;"><p><b>Kathmandu .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.5rem;">Nepal</div> 
+        </div>
       </div>
       <div class="city">
-        <img src="/Basai/assets/kathmandu.jpeg" alt="Dharan">
-        <p>Dharan, Nepal</p>
+        <img src="/assets/image-dharan-bazaar.jpg" alt="Dharan">
+        <div class="nepal" style="display: flex;"><p><b>Dharan .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.5rem;">Nepal</div> 
+        </div>
       </div>
     </div>
+  </div>
 
     <h2>Trending Stays</h2>
     <div class="trending-stays">
       <div class="house">
-        <img src="/Basai/assets/nishan1.jpeg" alt="Pokhara">
-        <p>Nishan's House, Dharan </p>
+        <img src="/assets/nishan1.jpeg" alt="Pokhara">
+        <div class="nepal" style="display: flex;"><p><b>Nishan's house .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.2rem;">Pokhara</div> 
+        </div>
         <div class="price-container">
             <h3>RS 900</h3>
             <p>.per Night</p>
@@ -82,8 +92,10 @@
       </div>
 
       <div class="house">
-        <img src="/Basai/assets/abhishek.jpeg" alt="Kathmandu">
-        <p>Abhishek's House, Pokhara </p>
+        <img src="/assets/abhishek.jpeg" alt="Kathmandu">
+        <div class="nepal" style="display: flex;"><p><b>Abhisheak's house .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.2rem;">Pokhara</div> 
+        </div>
         <div class="price-container">
             <h3>RS 900</h3>
             <p>.per Night</p>
@@ -91,8 +103,10 @@
       </div>
 
       <div class="house prashant">
-        <img src="/Basai/assets/prashant.jpeg" alt="Dharan">
-        <p>Prashant's House, Kathmandu </p>
+        <img src="/assets/prashant.jpeg" alt="Dharan">
+        <div class="nepal" style="display: flex;"><p><b>Prashant's house .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.2rem;">Kathmandu</div> 
+        </div>
         <div class="price-container">
             <h3>RS 900</h3>
             <p>.per Night</p>
@@ -100,16 +114,20 @@
       </div>
 
       <div class="house">
-        <img src="/Basai/assets/sushim1.jpeg" alt="Dharan">
-        <p>Sushim's House, Kathmandu </p>
+        <img src="/assets/sushim1.jpeg" alt="Dharan">
+        <div class="nepal" style="display: flex;"><p><b>Sushims's house .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.2rem;">Kathmandu</div> 
+        </div>
         <div class="price-container">
             <h3>RS 900</h3>
             <p>.per Night</p>
         </div>
       </div>
       <div class="house">
-        <img src="/Basai/assets/nishan2.jpeg" alt="Pokhara">
-        <p>Nishan's House, Dharan </p>
+        <img src="/assets/nishan2.jpeg" alt="Pokhara">
+        <div class="nepal" style="display: flex;"><p><b>Nishan's house .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.2rem;">Dharan</div> 
+        </div>
         <div class="price-container">
             <h3>RS 900</h3>
             <p>.per Night</p>
@@ -117,8 +135,10 @@
       </div>
 
       <div class="house">
-        <img src="/Basai/assets/abhishek2.jpeg" alt="Kathmandu">
-        <p>Abhishek's House, Pokhara </p>
+        <img src="/assets/abhishek2.jpeg" alt="Kathmandu">
+        <div class="nepal" style="display: flex;"><p><b>Abhisheak's house .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.2rem;">Pokhara</div> 
+        </div>
         <div class="price-container">
             <h3>RS 900</h3>
             <p>.per Night</p>
@@ -126,8 +146,10 @@
       </div>
 
       <div class="house prashant">
-        <img src="/Basai/assets/prashant.jpeg" alt="Dharan">
-        <p>Prashant's House, Kathmandu </p>
+        <img src="/assets/prashant.jpeg" alt="Dharan">
+        <div class="nepal" style="display: flex;"><p><b>Prashant's house .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.2rem;">Pokhara</div> 
+        </div>
         <div class="price-container">
             <h3>RS 900</h3>
             <p>.per Night</p>
@@ -135,8 +157,10 @@
       </div>
 
       <div class="house">
-        <img src="/Basai/assets/sushim1.jpeg" alt="Dharan">
-        <p>Sushim's House, Kathmandu </p>
+        <img src="/assets/sushim1.jpeg" alt="Dharan">
+        <div class="nepal" style="display: flex;"><p><b>Sushim's house .</b></p>
+          <div style="color: #5B5B5B; margin-top: 10px; margin-left: 10px;font-size: 1.2rem;">Pokhara</div> 
+        </div>
         <div class="price-container">
             <h3>RS 900</h3>
             <p>.per Night</p>

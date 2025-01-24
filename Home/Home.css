@@ -83,7 +83,7 @@ body {
   
   /* Hero Section */
   .hero-section {
-    background-image: url('/Basai/assets/navbar_bg.png'); 
+    background-image: url('/assets/navbar_bg.png'); 
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -173,11 +173,16 @@ body {
     padding: 20px;
     text-align: center;
   }
+
+  /* .trending-cities-main{
+    justify-content: center;
+  } */
   
   .trending-section h2 {
     font-size: 2rem;
     margin-bottom: 20px;
-    /* text-align: left; */
+    text-align: left;
+    margin-left: 260px;
   }
   
   .trending-cities {
@@ -191,7 +196,7 @@ body {
   
   .city {
     text-align: center;
-    width: 300px;
+    width: 315px;
   }
   
   .city img {
@@ -231,7 +236,7 @@ body {
     margin-top: 10px;
     text-align: left;
     font-size: 1.2rem;
-    font-weight: bold;
+    /* font-weight: bold; */
   }
   /* .prashant p {
     margin-top: 10px;
