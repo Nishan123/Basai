@@ -55,14 +55,14 @@ body {
     width: 100%;
     z-index: 1000;
   }
-  /* .nav-1{
+  .nav-1{
     display: flex !important;
-  } */
+  }
   
-  /* .logo {
+  .logo {
     font-size: 1.5rem;
     font-weight: bold;
-  } */
+  }
 
   .nav-links{
     margin-top: 30px;
@@ -321,13 +321,23 @@ body {
   border-radius: 5px;
   object-fit: cover;
 }
+.thumbnail {
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border 0.3s;
+}
+.thumbnail:hover, .thumbnail.active {
+  border: 2px solid #4f46e5;
+}
+
 .more-images {
   font-size: 14px;
   color: #555;
 }
 .booking-details {
   padding: 20px;
-  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+background: linear-gradient(to right, #add8e6, #00008b);
+
   border-radius: 10px;
   width: 60%;
   margin: 20px auto;
@@ -344,7 +354,7 @@ body {
   border-radius: 5px;
 }
 .booking-details button {
-  background-color: #4f46e5;
+ background-color: #007bff;
   color: white;
   cursor: pointer;
 }
@@ -410,7 +420,7 @@ body {
   margin-bottom: 70px;
   position: absolute;
   bottom: 10px;
-  left: 650px; /* Moves it further to the left */
+  left: 600px; /* Moves it further to the left */
   background: rgba(255, 255, 255, 0.9);
   padding: 15px;
   max-width: 50%;
@@ -434,6 +444,7 @@ body {
 .property-description {
   font-size: 14px;
   color: #555;
+  margin-left: 7px;
 }
 
 .property-features {
