@@ -50,7 +50,7 @@ body {
     color: white;
     padding: 10px 20px;
     position: fixed;
-    top: 0;
+    
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -79,7 +79,7 @@ body {
   }
 
   .nav-links a:visited{
-    background-color: white;
+    background-color: rgb(255, 255, 255);
   }
   
   .auth-buttons a {
@@ -131,7 +131,7 @@ body {
     display: flex;
     justify-content: center;
     position: relative;
-    top: 70px;
+    top: 0px;
     border: 3px solid #19FF00;
     background-color: #19FF00;
     margin: auto;
@@ -246,6 +246,15 @@ body {
     width: fit-content;
     margin: auto;
   }
+
+  .trending-cities, .trending-stays {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%; /* Let it expand and fit the container */
+    margin: auto;
+  }
+  
   
   .house {
     text-align: center;
@@ -294,14 +303,12 @@ body {
   width: 70%;
 }
 .main-image img {
-  display: block;
-  margin: 30px;
-  margin-left: 200px;
-  padding: auto;
-  width: 500px;
+  width: 400px;
   height: 300px;
-  border-radius: 20px;
+  border-radius: 8px;
+ margin-left: 200px;
 }
+
 .main-image{
   flex: 1;
 }
@@ -309,7 +316,6 @@ body {
   margin-left: 200px;
   padding: 10px;
   display: flex;
-  justify-content: left;
   gap: 10px;
   margin-top: 10px;
   
@@ -319,6 +325,8 @@ body {
   height: 50px;
   cursor: pointer;
   border-radius: 5px;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
   object-fit: cover;
 }
 .thumbnail {
@@ -340,7 +348,9 @@ background: linear-gradient(to right, #add8e6, #00008b);
 
   border-radius: 10px;
   width: 60%;
-  margin: 20px auto;
+  margin: 15px auto;
+  margin-top: 5px;
+  margin-bottom: 200px;
   text-align: center;
 }
 .booking-details input,
@@ -393,6 +403,7 @@ background: linear-gradient(to right, #add8e6, #00008b);
 
 
 .property-card {
+
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -407,23 +418,36 @@ background: linear-gradient(to right, #add8e6, #00008b);
   position: relative;
 }
 
-.main-image img {
-
-  width: 400px;
-  height: 300px;
-  border-radius: 8px;
-  
-}
 
 .description-container {
   margin: 20px;
   margin-bottom: 70px;
   position: absolute;
   bottom: 10px;
-  left: 600px; /* Moves it further to the left */
+  left: 600px; /* Default for larger screens */
   background: rgba(255, 255, 255, 0.9);
   padding: 15px;
   max-width: 50%;
+  box-sizing: border-box;
+}
+
+/* For medium screens (tablets) */
+@media (max-width: 1024px) {
+  .description-container {
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    max-width: 70%; /* Allow more space for content */
+  }
+}
+
+/* For small screens (mobile devices) */
+@media (max-width: 768px) {
+  .description-container {
+    position: static; /* Allow it to flow naturally */
+    margin: 10px auto; /* Center it with margin */
+    max-width: 90%; /* Full width with padding */
+    padding: 10px;
+  }
 }
 
 .property-header {
@@ -474,7 +498,7 @@ background: linear-gradient(to right, #add8e6, #00008b);
 .thumbnail-container {
   display: flex;
   gap: 5px;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .thumbnail-container img {
@@ -522,3 +546,6 @@ background: linear-gradient(to right, #add8e6, #00008b);
   font-size: 14px;
   color: #555;
 }
+
+
+
