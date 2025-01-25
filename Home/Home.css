@@ -431,24 +431,57 @@ background: linear-gradient(to right, #add8e6, #00008b);
   box-sizing: border-box;
 }
 
-/* For medium screens (tablets) */
+/* Styles for medium screens (tablets) */
 @media (max-width: 1024px) {
   .description-container {
-    left: 50%; /* Center it horizontally */
-    transform: translateX(-50%); /* Adjust for centering */
-    max-width: 70%; /* Allow more space for content */
+    position: absolute; /* Keep it positioned absolutely */
+    left: 50%; /* Center horizontally */
+    transform: translateX(30%); /* Adjust to achieve perfect centering */
+    max-width: 70%; /* Limit width for better readability */
   }
 }
 
-/* For small screens (mobile devices) */
+/* Styles for small screens (mobile devices) */
 @media (max-width: 768px) {
   .description-container {
-    position: static; /* Allow it to flow naturally */
-    margin: 10px auto; /* Center it with margin */
-    max-width: 90%; /* Full width with padding */
-    padding: 10px;
+    position: static; /* Allow natural flow within the layout */
+    margin: 10px auto; /* Center with auto margins */
+    max-width: 90%; /* Utilize most of the screen width */
+    padding: 10px; /* Add padding for better spacing */
   }
 }
+/* Styles for small screens (mobile devices) */
+@media (max-width: 768px) {
+  .description-container {
+    position: static; /* Allow natural flow within the layout */
+    margin: 10px auto; /* Center with auto margins */
+    max-width: 90%; /* Utilize most of the screen width */
+    padding: 10px; /* Add padding for better spacing */
+  }
+}
+
+/* Styles for very small screens (e.g., small phones, 480px and below) */
+@media (max-width: 480px) {
+  .description-container {
+    position: static; /* Allow natural flow */
+    margin: 5px auto; /* Narrower margin for tighter screens */
+    max-width: 95%; /* Almost full width */
+    padding: 8px; /* Slightly reduced padding */
+    font-size: 0.9rem; /* Adjust font size for better fit */
+  }
+}
+
+/* Styles for extremely small screens (e.g., very old devices or very compact UI) */
+@media (max-width: 320px) {
+  .description-container {
+    position: static; /* Natural flow */
+    margin: 5px auto; /* Centered with minimal margins */
+    max-width: 98%; /* Utilize maximum available width */
+    padding: 5px; /* Smaller padding to save space */
+    font-size: 0.8rem; /* Reduce font size further for readability */
+  }
+}
+
 
 .property-header {
   font-size: 20px;
