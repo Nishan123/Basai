@@ -34,21 +34,7 @@
         <h1>Explore · Stay · Relax</h1>
         <p>Book unique stays and unforgettable experiences anywhere in the world.</p>
       </div>
-      <div class="search-bar">
-        <div class="input-container" id="location">
-          <input type="text" placeholder="Where are you going?" class="input-location input-with-icon">
-          <img src="/assets/icon/icons8-car.gif" class="icon" alt="Car icon">
-        </div>
-        <div class="input-container" id="date">
-          <input type="date" placeholder="Check in Date - Check out Date" class="input-dates input-with-icon">
-          <img src="/assets/icon/icons8-date.gif" class="icon" alt="Date icon">
-        </div>
-        <div class="input-container">
-          <input type="number" placeholder="Number of people" class="input-people input-with-icon">
-          <img src="/assets/icon/icons8-crowd-30.png" class="icon" alt="Crowd icon">
-        </div>
-        <button class="search-button">Search</button>
-      </div>
+    
     </section>
 
     <section class="property-card">
@@ -59,10 +45,10 @@
         <img class="thumbnail" src="assets/abhishek2.jpeg" alt="Thumbnail 1" onclick="changeImage('assets/abhishek2.jpeg')">
         <img class="thumbnail" src="assets/nishan1.jpeg" alt="Thumbnail 2" onclick="changeImage('assets/nishan1.jpeg')">
         <img class="thumbnail" src="assets/prashant.jpeg" alt="Thumbnail 3" onclick="changeImage('assets/prashant.jpeg')">
-        <span class="more-images">+3</span>
+    
       </div>
       <div class="description-container">
-        <h2 class="property-header">Prashant's House, <span class="location">Pokhara</span></h2>
+        <h2 class="property-header">Sushim's House, <span class="location">Pokhara</span></h2>
         <p class="property-location">
           <i class="fas fa-map-marker-alt"></i> Pokhara, Patan
         </p>
@@ -113,14 +99,15 @@
       <input type="tel" placeholder="Phone No">
       <input type="number" placeholder="No. of people">
       <div>
-        <input type="date" placeholder="Check-in">
-        <input type="date" placeholder="Check-out">
+        <input type="text" id="date-range" placeholder="Check-in / Check-out">
       </div>
-      <p>No. of nights: 3</p>
-      <p>Your total: NPR 4500</p>
+      <p id="nights-info">No. of nights: 0</p>
+      <p>Your total: NPR <span id="total-cost">0</span></p>
       <button>Book Now</button>
     </div>
-  </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="home.js"></script>
 </body>
-<script src="home.js"></script>
+
 </html>
