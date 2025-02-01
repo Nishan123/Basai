@@ -55,7 +55,21 @@ img {
 }
 
 .nav-links a:visited{
-  background-color: white;
+  background-color: rgb(185, 73, 73);
+}
+/* Style for active button */
+.tab-link {
+  text-decoration: none;
+  padding: 10px;
+  display: inline-block;
+  color: #ef5555;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-link.active {
+  background-color: #000000;  /* Change the background color when active */
+  color: white;  /* Change text color to white */
+  border-radius: 5px;  /* Optional: add rounded corners */
 }
 
 .auth-buttons a {
@@ -107,13 +121,12 @@ img {
   display: flex;
   justify-content: center;
   position: relative;
-  top: 0px;
+  top: 75px;
   border: 3px solid #19FF00;
   background-color: #19FF00;
   margin: auto;
   width: fit-content;
   border-radius: 7px;
-
 }
 
 .search-bar input,
@@ -172,18 +185,18 @@ img {
 /* Trending Section */
 .trending-section {
   padding: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .trending-cities-main{
-  justify-content: center;
+  justify-content: left;
 }
 
 .trending-section h2 {
   font-size: 2rem;
   margin-bottom: 20px;
   text-align: left;
-  margin-left: 260px;
+  margin-left: 160px;
 }
 
 .trending-cities {
@@ -303,36 +316,6 @@ For DashBoard UI */
 .thumbnail:hover, .thumbnail.active {
   border: 2px solid #4f46e5;
 }
-
-.booking-details {
-  padding: 20px;
-background: linear-gradient(to right, #add8e6, #00008b);
-
-  border-radius: 10px;
-  width: 60%;
-  margin: 15px auto;
-  margin-top: 30px;
-  margin-bottom: 200px;
-  text-align: center;
-}
-.booking-details input,
-.booking-details button {
-  display: block;
-  width: 80%;
-  margin: 10px auto;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.booking-details button {
- background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
-.details-header {
-  margin-bottom: 15px;
-}
 .property-description {
   padding: 20px;
   text-align: left;
@@ -383,7 +366,7 @@ background: linear-gradient(to right, #add8e6, #00008b);
 
 .description-container {
   margin: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 13px;
   position: absolute;
   bottom: 10px;
   left: 600px; /* Default for larger screens */
@@ -477,7 +460,7 @@ background: linear-gradient(to right, #add8e6, #00008b);
   color: #ff0000;
 }
 
-.book-now-button {
+/* .book-now-button {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -488,7 +471,7 @@ background: linear-gradient(to right, #add8e6, #00008b);
 
 .book-now-button:hover {
   background-color: #0056b3;
-}
+} */
 
 .thumbnail-container {
   display: flex;
@@ -541,6 +524,109 @@ background: linear-gradient(to right, #add8e6, #00008b);
   font-size: 14px;
   color: #555;
 }
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Booking Container */
+.booking-container {
+  width: 500px;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  margin: 50px auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
+.booking-container h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+/* Input Fields */
+form input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Input with Icon */
+.input-icon {
+  position: relative;
+}
+
+.input-icon input {
+  padding-right: 35px;
+}
+
+.input-icon i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: gray;
+}
+
+/* Date Container */
+.date-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-container .input-icon {
+  width: 48%;
+}
+
+/* Booking Info */
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  font-size: 18px;
+  color: black;
+}
+
+.info .price {
+  color: red;
+  font-size: 20px;
+}
+
+/* Submit Button */
+button {
+  width: 100%;
+  background: royalblue;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: darkblue;
+}
+
+/* Ensure date inputs look clean */
+input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
 
 
 

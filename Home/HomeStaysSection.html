@@ -93,21 +93,39 @@
       
     </section>
 
-    <div class="booking-details">
-      <div class="details-header">Booking Details</div>
-      <input type="text" placeholder="Your full name">
-      <input type="tel" placeholder="Phone No">
-      <input type="number" placeholder="No. of people">
-      <div>
-        <input type="text" id="date-range" placeholder="Check-in / Check-out">
-      </div>
-      <p id="nights-info">No. of nights: 0</p>
-      <p>Your total: NPR <span id="total-cost">0</span></p>
-      <button>Book Now</button>
-    </div>
-  
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="home.js"></script>
+    <div class="booking-container">
+      <h2>Booking details</h2>
+      <form>
+          <input type="text" placeholder="Your full name">
+          <div class="input-icon">
+              <input type="text" placeholder="Phone no">
+              <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="input-icon">
+              <input type="text" placeholder="No of people">
+              <i class="fas fa-user"></i>
+          </div>
+          <div class="date-container">
+              <div class="input-icon">
+                  <input type="text" placeholder="Check in">
+                  <i class="fas fa-calendar-alt"></i>
+              </div>
+              <div class="input-icon">
+                  <input type="text" placeholder="Check out">
+                  <i class="fas fa-calendar-alt"></i>
+              </div>
+          </div>
+          <div class="info">
+              <p>No of nights : <strong>3 nights</strong></p>
+              <p>Your total : <strong>NPR . <span class="price">4500</span></strong></p>
+          </div>
+          <button type="submit">Book now</button>
+      </form>
+  </div>
+
+  </div>
+ <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="home.js"></script>
   
 </body>
 
