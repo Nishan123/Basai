@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basai - Explore Stay Relax</title>
+  <link rel="stylesheet" href="ImageBanner.css">
+  <link rel="stylesheet" href="Home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-1">
+      <div class="logo"><img src="/assets/basaiIcon.png" alt="Basai Icon"></div>
+    </div>
+    <div class="auth-buttons">
+      <a href="/SignUp/Signup.html" class="register">Register</a>
+      <a href="/login/login.html" class="sign-in">Sign in</a>
+    </div>
+    <div class="left-nav">
+      <nav class="nav-links">
+        <a href="Home.html" class="tab-link">Home</a>
+        <a href="HotelsSection.html" class="tab-link">Hotels</a>
+        <a href="PermiumSection.html" class="tab-link">Premium</a>
+        <a href="HomestaysSection.html" class="tab-link">Homestays</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="all">
+
+
+    <section class="property-card">
+      <div class="main-image">
+        <img id="main-image" src="assets/nishan1.jpeg" alt="Main Image">
+      </div>
+      <div class="thumbnail-container">
+        <img class="thumbnail" src="assets/abhishek2.jpeg" alt="Thumbnail 1" onclick="changeImage('assets/abhishek2.jpeg')">
+        <img class="thumbnail" src="assets/nishan1.jpeg" alt="Thumbnail 2" onclick="changeImage('assets/nishan1.jpeg')">
+        <img class="thumbnail" src="assets/prashant.jpeg" alt="Thumbnail 3" onclick="changeImage('assets/prashant.jpeg')">
+    
+      </div>
+      <div class="description-container">
+        <h2 class="property-header">Sushim's House, <span class="location">Pokhara</span></h2>
+        <p class="property-location">
+          <i class="fas fa-map-marker-alt"></i> Pokhara, Patan
+        </p>
+        <p class="property-description">
+          Discover the perfect blend of comfort and elegance at Nishan's House. Each guest room offers a cozy seating area, a private bathroom with modern showers, complimentary toiletries, and flat-screen TVs for your entertainment. Enjoy serene mornings on balconies overlooking scenic views (available in select rooms). Perfect for family vacations or business stays.
+        </p>
+        <div class="property-features">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-users"></i></div>
+            <div class="feature-text"><span class="feature-box"></span> Family-Friendly Stay</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-parking"></i></div>
+            <div class="feature-text"><span class="feature-box"></span> Secure Parking Available</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-hot-tub"></i></div>
+            <div class="feature-text"><span class="feature-box"></span> Relaxing Hot Tub</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-taxi"></i></div>
+            <div class="feature-text"><span class="feature-box"></span> Taxi Service</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-coffee"></i></div>
+            <div class="feature-text"><span class="feature-box"></span> Complimentary Tea/Coffee</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-utensils"></i></div>
+            <div class="feature-text"><span class="feature-box"></span> Delicious Dining Options</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fas fa-child"></i></div>
+            <div class="feature-text"><span class="feature-box"></span> Child-Friendly Amenities</div>
+          </div>
+        </div>
+        <div class="property-price">
+          <strong>NPR 4,500</strong> / per night
+        </div>
+        <button class="book-now-button">Book Now</button>
+      </div>
+      
+    </section>
+
+    <div class="booking-details">
+      <div class="details-header">Booking Details</div>
+      <input type="text" placeholder="Your full name">
+      <input type="tel" placeholder="Phone No">
+      <input type="number" placeholder="No. of people">
+      <div>
+        <input type="text" id="date-range" placeholder="Check-in / Check-out">
+      </div>
+      <p id="nights-info">No. of nights: 0</p>
+      <p>Your total: NPR <span id="total-cost">0</span></p>
+      <button>Book Now</button>
+    </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="home.js"></script>
+</body>
+
+</html>

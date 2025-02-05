@@ -11,22 +11,6 @@
 
 
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Select all property cards
-//   const propertyCards = document.querySelectorAll(".property-card");
-
-//   propertyCards.forEach((card) => {
-//     card.addEventListener("click", function () {
-//       // Remove "active" class from all cards
-//       propertyCards.forEach((c) => c.classList.remove("active"));
-
-//       // Add "active" class to the clicked card
-//       this.classList.add("active");
-//     });
-//   });
-// });
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const uploadBox = document.getElementById("uploadBox");
     const fileInput = document.getElementById("fileInput");
@@ -43,6 +27,22 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         reader.readAsDataURL(fileInput.files[0]);
       }
+    });
+  });
+
+  
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const typeCards = document.querySelectorAll(".type-card");
+  
+    typeCards.forEach(card => {
+      card.addEventListener("click", () => {
+        // Remove active class from all cards
+        typeCards.forEach(c => c.classList.remove("active"));
+  
+        // Add active class to the clicked card
+        card.classList.add("active");
+      });
     });
   });
   
