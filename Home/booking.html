@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basai - Explore Stay Relax</title>
-  <link rel="stylesheet" href="ImageBanner.css">
+  <link rel="stylesheet" href="booking.css">
   <link rel="stylesheet" href="Home.css">
-  <<link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 <body>
@@ -29,27 +29,7 @@
   </header>
 
   <div class="all">
-    <section class="hero-section">
-      <div class="hero-text">
-        <h1>Explore · Stay · Relax</h1>
-        <p>Book unique stays and unforgettable experiences anywhere in the world.</p>
-      </div>
-      <div class="search-bar">
-        <div class="input-container" id="location">
-          <input type="text" placeholder="Where are you going?" class="input-location input-with-icon">
-          <img src="/assets/icon/icons8-car.gif" class="icon" alt="Car icon">
-        </div>
-        <div class="input-container" id="date">
-          <input type="date" placeholder="Check in Date - Check out Date" class="input-dates input-with-icon">
-          <img src="/assets/icon/icons8-date.gif" class="icon" alt="Date icon">
-        </div>
-        <div class="input-container">
-          <input type="number" placeholder="Number of people" class="input-people input-with-icon">
-          <img src="/assets/icon/icons8-crowd-30.png" class="icon" alt="Crowd icon">
-        </div>
-        <button class="search-button">Search</button>
-      </div>
-    </section>
+
 
     <section class="property-card">
       <div class="main-image">
@@ -107,6 +87,21 @@
       
     </section>
 
+    <div class="booking-details">
+      <div class="details-header">Booking Details</div>
+      <input type="text" placeholder="Your full name">
+      <input type="tel" placeholder="Phone No">
+      <input type="number" placeholder="No. of people">
+      <div>
+        <input type="text" id="date-range" placeholder="Check-in / Check-out">
+      </div>
+      <p id="nights-info">No. of nights: 0</p>
+      <p>Your total: NPR <span id="total-cost">0</span></p>
+      <button>Book Now</button>
+    </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="home.js"></script>
+</body>
 
-<script src="home.js"></script>
 </html>

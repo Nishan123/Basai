@@ -10,198 +10,6 @@ a {
   color: inherit;
 }
 
-<<<<<<< HEAD
-  .nav-links a:visited{
-    background-color: white;
-  }
-  
-  .auth-buttons a {
-    margin: 0 5px;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  
-  .register {
-    background-color: white;
-    color: #001A72;
-    border: 1px solid white;
-  }
-  
-  .sign-in {
-    background-color: white;
-    color: #001A72;
-    border: none;
-  }
-
-  .all{
-    position: relative;
-    top: 145px;
-    width: 100%;
-  }
-  
-  /* Hero Section */
-  .hero-section {
-    background-image: url('/assets/navbar_bg.png'); 
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-    color: white;
-    padding: 50px 20px;
-    
-  }
-  
-  .hero-text h1 {
-    font-size: 3rem;
-    margin: 0;
-  }
-  
-  .hero-text p {
-    font-size: 1.2rem;
-    margin: 10px 0 30px;
-  }
-  
-  /* search bar section */
-  .search-bar {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    top: 70px;
-    border: 3px solid #19FF00;
-    background-color: #19FF00;
-    margin: auto;
-    width: fit-content;
-    border-radius: 7px;
-  }
-  
-  .search-bar input,
-  .search-bar button {
-    padding: 10px;
-    margin: 0 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  /* .input-location,
-  .input-dates,
-  .input-people {
-    flex: 1;
-  } */
-  
-  .search-button {
-    background-color: #5566FF;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-
-  .input-container {
-    position: relative;
-    width: auto; 
-    border: 3px solid #19FF00;
-  }
-  
-  .input-with-icon {
-    width: 100%;
-    padding-left: 30px; 
-    padding: 10px;
-    font-size: 16px;
-    text-align: center; 
-    box-sizing: border-box;
-  }
-  
-  .icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    /* font-size: 18px; */
-    color: #888; 
-    width: 30px;
-  }
-  #date{
-    width: 45vh;
-  }
-  #location{
-    width: 40vh;
-  }
-  
-  
-  /* Trending Section */
-  .trending-section {
-    padding: 20px;
-    text-align: center;
-  }
-
-  /* .trending-cities-main{
-    justify-content: center;
-  } */
-  
-  .trending-section h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: left;
-    margin-left: 260px;
-  }
-  
-  .trending-cities {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    justify-content: center;
-    gap: 20px;
-    width: fit-content;
-    margin: auto;
-  }
-  
-  .city {
-    text-align: center;
-    width: 315px;
-  }
-  
-  .city img {
-    border-radius: 10px;
-    width: 100%;
-    height: 200px;
-  }
-  
-  .city p {
-    margin-top: 10px;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-
-  /* trending stays */
-  .trending-stays {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    justify-content: center;
-    gap: 20px;
-    width: fit-content;
-    margin: auto;
-  }
-  
-  .house {
-    text-align: center;
-    width: auto;
-  }
-  
-  .house img {
-    border-radius: 10px;
-    width: 100%;
-    height: 200px;
-  }
-  
-  .house p {
-    margin-top: 10px;
-    text-align: left;
-    font-size: 1.2rem;
-    /* font-weight: bold; */
-  }
-  /* .prashant p {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    font-weight: bold;
-  } */
-=======
 img {
   max-width: 100%;
   height: auto;
@@ -245,7 +53,6 @@ img {
   border-radius: 18px;
   padding: 9px;
 }
->>>>>>> origin/abisheak
 
 .nav-links a:visited{
   background-color: white;
@@ -258,9 +65,9 @@ img {
 }
 
 .register {
-  background-color: transparent;
-  color: white;
-  border: 1px solid white;
+  background-color: white;
+  color: #001A72;
+  border: none;
 }
 
 .sign-in {
