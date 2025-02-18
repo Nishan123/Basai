@@ -1,8 +1,15 @@
-// import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import basaiIcon from "../assets/basaiIcon.png";
 
 const Navbar = () => {
+  const [selectedLink, setSelectedLink] = useState(null);
+
+  const handleLinkClick = (e, linkName) => {
+    e.preventDefault(); // Prevent navigation
+    setSelectedLink(linkName);
+  };
+
   return (
     <>
       <div className="flex fixed top-0 left-0 w-full bg-[#001A72] text-white z-50">
@@ -38,34 +45,48 @@ const Navbar = () => {
           </div>
 
           {/* Bottom Navbar: Navigation Links */}
-          <div className="flex gap-1 container px-8 py-6 max-w-5xl mx-auto ">
-            <Link
-              to="/"
-              className="border-2 border-white px-6 py-2 rounded-full text-white"
-            >
-              Home
-            </Link>
+          <div className="flex container px-8 gap-4 py-6 max-w-5xl mx-auto">
             <Link
               to="/notFound"
-              className="border-2 border-white px-6 py-2 rounded-full text-white"
+              className={`border-2 border-white px-6 py-2 rounded-full transition-colors ${
+                selectedLink === "Hotels"
+                  ? "bg-white text-[#001A72]"
+                  : "text-white"
+              }`}
+              onClick={(e) => handleLinkClick(e, "Hotels")}
             >
               Hotels
             </Link>
             <Link
               to="/notFound"
-              className="border-2 border-white px-6 py-2 rounded-full text-white"
+              className={`border-2 border-white px-6 py-2 rounded-full transition-colors ${
+                selectedLink === "Pods"
+                  ? "bg-white text-[#001A72]"
+                  : "text-white"
+              }`}
+              onClick={(e) => handleLinkClick(e, "Pods")}
             >
               Pods
             </Link>
             <Link
               to="/notFound"
-              className="border-2 border-white px-6 py-2 rounded-full text-white"
+              className={`border-2 border-white px-6 py-2 rounded-full transition-colors ${
+                selectedLink === "Homestays"
+                  ? "bg-white text-[#001A72]"
+                  : "text-white"
+              }`}
+              onClick={(e) => handleLinkClick(e, "Homestays")}
             >
               Home stays
             </Link>
             <Link
               to="/notFound"
-              className="border-2 border-white px-6 py-2 rounded-full text-white"
+              className={`border-2 border-white px-6 py-2 rounded-full transition-colors ${
+                selectedLink === "Premium"
+                  ? "bg-white text-[#001A72]"
+                  : "text-white"
+              }`}
+              onClick={(e) => handleLinkClick(e, "Premium")}
             >
               Premium
             </Link>

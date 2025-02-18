@@ -116,12 +116,12 @@ const HomePage = () => {
         </section>
 
         {/* Search Bar */}
-        <div className="flex -mt-7  rounded-2xl w-fit mx-auto border-4 border-green-400 bg-white">
-          <div className="relative p-1 rounded-1xl border-4 border-green-400">
+        <div className="flex -mt-8 rounded-xl w-fit mx-auto border-2 border-green-800 bg-green-800 p-0.5">
+          <div className="relative p-0.5 rounded-lg border-2 border-green-800 mx-0.5">
             <input
               type="text"
               placeholder="Where are you going?"
-              className="px-8 py-1 rounded text-center"
+              className="px-8 py-2.5 rounded-lg text-center bg-white"
             />
             <img
               src={carIcon}
@@ -130,14 +130,14 @@ const HomePage = () => {
             />
           </div>
 
-          <div className="relative p-1 rounded-1xl mx-0 border-4 border-green-400">
+          <div className="relative p-0.5 rounded-lg border-2 border-green-800 mx-0.5">
             <DatePicker
               selectsRange={true}
               startDate={startDate}
               endDate={endDate}
               onChange={(update) => setDateRange(update)}
               isClearable={true}
-              className="px-10 py-1 rounded text-center block w-fit"
+              className="px-10 py-2.5 rounded-lg text-center block w-fit bg-white"
               placeholderText="Check-in - Check-out"
             />
             <img
@@ -147,11 +147,12 @@ const HomePage = () => {
             />
           </div>
 
-          <div className="relative p-1 rounded-1xl border-4 border-green-400">
+          <div className="relative p-0.3 rounded-lg border-2 border-green-800 mx-0.3">
             <input
               type="number"
+              min="1"
               placeholder="Number of people"
-              className="px-12 py-1 rounded text-center"
+              className="px-12 py-2.5 rounded-lg text-center bg-white"
             />
             <img
               src={PeopleIcon}
@@ -160,7 +161,7 @@ const HomePage = () => {
             />
           </div>
 
-          <button className="bg-blue-500 text-white px-7 py-0 mr-0.5 rounded-1xl border-4 border-green-400 ">
+          <button className="bg-blue-500 text-white px-7 py-2.5 mx-0.5  rounded-lg border-2 border-green-800 hover:bg-blue-600">
             Search
           </button>
         </div>
@@ -222,6 +223,57 @@ const HomePage = () => {
           </div>
         </section>
        
+        {/* Footer */}
+        <footer className="bg-gradient-to-r from-blue-500 to-indigo-700 text-white mt-20">
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <div className="grid grid-cols-4 gap-8">
+              {/* About Section */}
+              <div>
+                <h3 className="text-xl font-bold mb-4">About Basai</h3>
+                <p className="text-gray-300">
+                  Your trusted platform for finding and booking unique stays across Nepal.
+                </p>
+              </div>
+              
+              {/* Quick Links */}
+              <div>
+                <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-gray-300 hover:text-blue-400">Home</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-400">Search Stays</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-400">List Your Property</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-400">Contact Us</a></li>
+                </ul>
+              </div>
+              
+              {/* Popular Destinations */}
+              <div>
+                <h3 className="text-xl font-bold mb-4">Popular Destinations</h3>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-gray-300 hover:text-blue-400">Kathmandu</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-400">Pokhara</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-400">Dharan</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-blue-400">Lalitpur</a></li>
+                </ul>
+              </div>
+              
+              {/* Contact Info */}
+              <div>
+                <h3 className="text-xl font-bold mb-4">Contact Us</h3>
+                <ul className="space-y-2">
+                  <li className="text-gray-300">📞 +977 987654321</li>
+                  <li className="text-gray-300">✉️ info@basai.com</li>
+                  <li className="text-gray-300">📍 Kathmandu, Nepal</li>
+                </ul>
+              </div>
+            </div>
+            
+            {/* Copyright */}
+            <div className="border-t border-gray-600 mt-8 pt-8 text-center text-gray-300">
+              <p>&copy; 2024 Basai. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );

@@ -66,9 +66,9 @@ const AddPropertyForm = () => {
         </p>
 
         {/* Property Types */}
-        <div className="property-type flex justify-between mb-8">
+        <div className="property-type flex justify-between gap-4 mb-8">
           <div
-            className={`type-card flex flex-col items-center p-6 border-2 border-gray-300 rounded-lg text-center cursor-pointer transition-colors duration-300 ${
+            className={`type-card w-64 flex flex-col items-center py-8 px-6 border-2 border-gray-300 rounded-lg text-center cursor-pointer transition-colors duration-300 ${
               activeType === "Homestay"
                 ? "border-indigo-500"
                 : "hover:border-gray-400"
@@ -79,7 +79,7 @@ const AddPropertyForm = () => {
             <p className="text-gray-700 font-semibold text-lg">Homestay</p>
           </div>
           <div
-            className={`type-card flex flex-col items-center p-6 border-2 border-gray-300 rounded-lg text-center cursor-pointer transition-colors duration-300 ${
+            className={`type-card w-64 flex flex-col items-center py-8 px-6 border-2 border-gray-300 rounded-lg text-center cursor-pointer transition-colors duration-300 ${
               activeType === "Pods"
                 ? "border-indigo-500"
                 : "hover:border-gray-400"
@@ -90,7 +90,7 @@ const AddPropertyForm = () => {
             <p className="text-gray-700 font-semibold text-lg">Pods</p>
           </div>
           <div
-            className={`type-card flex flex-col items-center p-6 border-2 border-gray-300 rounded-lg text-center cursor-pointer transition-colors duration-300 ${
+            className={`type-card w-64 flex flex-col items-center py-8 px-6 border-2 border-gray-300 rounded-lg text-center cursor-pointer transition-colors duration-300 ${
               activeType === "Hotels"
                 ? "border-indigo-500"
                 : "hover:border-gray-400"
@@ -101,7 +101,7 @@ const AddPropertyForm = () => {
             <p className="text-gray-700 font-semibold text-lg">Hotels</p>
           </div>
           <div
-            className={`type-card flex flex-col items-center p-6 border-2 border-gray-300 rounded-lg text-center cursor-pointer transition-colors duration-300 ${
+            className={`type-card w-64 flex flex-col items-center py-8 px-6 border-2 border-gray-300 rounded-lg text-center cursor-pointer transition-colors duration-300 ${
               activeType === "Premium"
                 ? "border-indigo-500"
                 : "hover:border-gray-400"
