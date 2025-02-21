@@ -1,9 +1,47 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Ensure Link is imported
+import { Link, useNavigate } from "react-router-dom"; // Ensure Link and useNavigate are imported
 import signupImage from "../assets/signupImage.png";
 import prashantImage from "../assets/prashant.jpeg";
 import sushim1Image from "../assets/sushim1.jpeg";
 import basaiIcon from "../assets/basaiIcon.png";
+import axios from 'axios';
+
+// Configure axios with better error handling
+const api = axios.create({
+    baseURL: 'http://localhost:5000',
+    timeout: 5000,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+});
+
+// Add request interceptor for debugging
+api.interceptors.request.use(request => {
+    console.log('Starting Request:', {
+        url: request.url,
+        method: request.method,
+        headers: request.headers,
+        data: request.data
+    });
+    return request;
+});
+
+// Add response interceptor for debugging
+api.interceptors.response.use(
+    response => {
+        console.log('Response:', response);
+        return response;
+    },
+    error => {
+        console.error('Response Error:', {
+            message: error.message,
+            response: error.response,
+            request: error.request,
+            config: error.config
+        });
+        return Promise.reject(error);
+    }
+);
 
 const Signup = () => {
   const images = [
@@ -17,6 +55,8 @@ const Signup = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,6 +64,85 @@ const Signup = () => {
     }, 4000);
     return () => clearInterval(interval);
   }, [images.length]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    const formData = new FormData(e.target);
+    const data = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+      confirmPassword: formData.get("confirmPassword"),
+    };
+
+    console.log('Submitting form with data:', {
+      ...data,
+      password: data.password ? '****' : undefined,
+      confirmPassword: data.confirmPassword ? '****' : undefined
+    });
+
+    // Basic frontend validation
+    if (!data.firstName || !data.lastName || !data.email || !data.password) {
+      const missingFields = Object.entries(data)
+        .filter(([key, value]) => !value && key !== 'confirmPassword')
+        .map(([key]) => key);
+      setError(`Missing required fields: ${missingFields.join(', ')}`);
+      return;
+    }
+
+    if (!data.email.includes('@')) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    if (data.password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
+
+    if (data.password !== data.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    if (!e.target.terms.checked) {
+      setError("Please agree to the terms and conditions");
+      return;
+    }
+
+    try {
+      // Test server connection
+      try {
+        const testResponse = await api.get('/test');
+        console.log('Server test successful:', testResponse.data);
+      } catch (testError) {
+        console.error('Server test failed:', testError);
+        setError('Cannot connect to server. Please check if the backend server is running.');
+        return;
+      }
+
+      // Proceed with signup
+      const response = await api.post('/users/signup', data);
+      console.log('Signup successful:', response.data);
+      alert("Signup successful! Please login.");
+      navigate("/login");
+    } catch (err) {
+      console.error('Signup failed:', err);
+      
+      if (!err.response) {
+        setError('Network error. Please check if the server is running.');
+      } else {
+        setError(
+          err.response?.data?.error || 
+          err.response?.data?.details || 
+          'An unexpected error occurred'
+        );
+      }
+    }
+  };
 
   return (
     <div className="flex h-screen m-5 font-sans mx-12 gap-6">
@@ -60,11 +179,12 @@ const Signup = () => {
           <div className="font-bold text-black">Basai·</div>
           <div>Explore · Stay · Relax</div>
         </div>
-        <form
-          className="w-full"
-          method="post"
-          action="http://localhost:5005/signup"
-        >
+        {error && (
+          <div className="w-full p-3 mb-4 text-red-500 bg-red-100 rounded">
+            {error}
+          </div>
+        )}
+        <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex gap-2">
             <input
               type="text"

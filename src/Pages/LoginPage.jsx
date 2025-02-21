@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import signupImage from "../assets/signupImage.png";
 import prashantImage from "../assets/prashant.jpeg";
 import sushim1Image from "../assets/sushim1.jpeg";
@@ -6,9 +7,23 @@ import basaiIcon from "../assets/basaiIcon.png";
 import mailIcon from "../assets/icon/mail-142.png";
 import eyeIcon from "../assets/icon/eye-12111.png";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+
+// Configure axios
+const api = axios.create({
+    baseURL: 'http://localhost:5000',
+    timeout: 5000,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+});
 
 const Login = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  
   const slides = [
     signupImage,
     prashantImage,
@@ -25,6 +40,55 @@ const Login = () => {
     }, 4000);
     return () => clearInterval(interval);
   }, [slides.length]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    const formData = new FormData(e.target);
+    const data = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+
+    // Basic validation
+    if (!data.email || !data.password) {
+      setError("Email and password are required");
+      return;
+    }
+
+    if (!data.email.includes('@')) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    if (!e.target.terms.checked) {
+      setError("Please agree to the terms and conditions");
+      return;
+    }
+
+    try {
+      const response = await api.post('/users/login', data);
+      console.log('Login successful:', response.data);
+      
+      // Store the token and user data in localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      
+      // Show success message
+      alert("Login successful!");
+      
+      // Redirect to home page
+      navigate("/");
+    } catch (err) {
+      console.error('Login failed:', err);
+      
+      setError(
+        err.response?.data?.error || 
+        'Failed to login. Please check your credentials.'
+      );
+    }
+  };
 
   return (
     <div className="flex h-screen font-sans mx-12 gap-9 mr-7 ml-7 mt-4">
@@ -51,10 +115,16 @@ const Login = () => {
           <span className="font-bold text-black">Basai·</span> Explore · Stay ·
           Relax
         </div>
-        <form className="w-full mr-44">
+        {error && (
+          <div className="w-full p-3 mb-4 text-red-500 bg-red-100 rounded">
+            {error}
+          </div>
+        )}
+        <form className="w-full mr-44" onSubmit={handleSubmit}>
           <div className="relative w-full mb-4">
             <input
               type="email"
+              name="email"
               placeholder="Email"
               className="w-full p-3 border-2 border-black rounded bg-gray-300"
             />
@@ -66,25 +136,27 @@ const Login = () => {
           </div>
           <div className="relative w-full mb-4">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
+              name="password"
               placeholder="Password"
               className="w-full p-3 border-2 border-black rounded bg-gray-300"
             />
             <img
               src={eyeIcon}
               alt="eye icon"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
             />
           </div>
           <div className="flex items-center mb-4">
-            <input type="checkbox" id="terms" className="mr-2" />
+            <input type="checkbox" id="terms" name="terms" className="mr-2" />
             <label htmlFor="terms" className="text-sm text-gray-600">
               Agree to the terms and conditions
             </label>
           </div>
           <button
             type="submit"
-            className="w-full p-3 bg-indigo-600 text-white font-bold rounded"
+            className="w-full p-3 bg-indigo-600 text-white font-bold rounded hover:bg-indigo-700"
           >
             Login
           </button>
