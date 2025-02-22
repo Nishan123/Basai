@@ -1,11 +1,11 @@
 import { useState } from "react";
-// import basaiIcon from '../assets/basaiIcon.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import homeIcon from "../assets/addprop/home.png";
 import podsIcon from "../assets/addprop/pods.png";
 import smallHotelIcon from "../assets/addprop/smallHotel.png";
 import hotelIcon from "../assets/addprop/hotel.png";
 import Navbar from "../components/NavbarB";
-// import ProfileComponent from "../components/ProfileNav";
 import {
   Bath,
   Car,
@@ -65,11 +65,13 @@ const AddPropertyForm = () => {
 
         // Validate fields
         if (!title || !description || !location || !price) {
-            throw new Error('Please fill in all required fields');
+            toast.error('Please fill in all required fields');
+            return;
         }
 
         if (!selectedFiles.length) {
-            throw new Error('Please select at least one image');
+            toast.error('Please select at least one image');
+            return;
         }
 
         // Append form data
@@ -99,7 +101,7 @@ const AddPropertyForm = () => {
         }
 
         console.log('Success:', responseData);
-        alert("Property uploaded successfully!");
+        toast.success("Property uploaded successfully!");
         
         // Reset form
         e.target.reset();
@@ -109,7 +111,7 @@ const AddPropertyForm = () => {
         
     } catch (error) {
         console.error("Upload error:", error);
-        alert(error.message || "Failed to upload property");
+        toast.error(error.message || "Failed to upload property");
     } finally {
         setLoading(false);
     }
@@ -130,6 +132,18 @@ const AddPropertyForm = () => {
   return (
     <>
       <Navbar />
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
 
       <div className="container px-8 py-8 max-w-5xl mx-auto mt-35">
         <h2 className="text-3xl font-bold mb-4">List your property .</h2>
