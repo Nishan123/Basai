@@ -22,6 +22,8 @@ const Login = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
   const navigate = useNavigate();
   
   const slides = [
@@ -41,9 +43,18 @@ const Login = () => {
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  const validateForm = (data) => {
+    const errors = {};
+    if (!data.email?.trim()) errors.email = 'Email is required';
+    if (!data.password) errors.password = 'Password is required';
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setValidationErrors({});
+    setIsLoading(true);
 
     const formData = new FormData(e.target);
     const data = {
@@ -51,42 +62,30 @@ const Login = () => {
       password: formData.get("password"),
     };
 
-    // Basic validation
-    if (!data.email || !data.password) {
-      setError("Email and password are required");
-      return;
-    }
-
-    if (!data.email.includes('@')) {
-      setError("Please enter a valid email address");
-      return;
-    }
-
-    if (!e.target.terms.checked) {
-      setError("Please agree to the terms and conditions");
+    // Validate form
+    const errors = validateForm(data);
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      setIsLoading(false);
       return;
     }
 
     try {
       const response = await api.post('/users/login', data);
-      console.log('Login successful:', response.data);
       
-      // Store the token and user data in localStorage
+      // Store user data securely
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       
-      // Show success message
-      alert("Login successful!");
-      
-      // Redirect to home page
       navigate("/");
     } catch (err) {
       console.error('Login failed:', err);
-      
       setError(
         err.response?.data?.error || 
-        'Failed to login. Please check your credentials.'
+        'Login failed. Please check your credentials.'
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -126,8 +125,15 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="Email"
-              className="w-full p-3 border-2 border-black rounded bg-gray-300"
+              className={`w-full p-3 border-2 ${
+                validationErrors.email ? 'border-red-500' : 'border-black'
+              } rounded bg-gray-300`}
             />
+            {validationErrors.email && (
+              <div className="text-red-500 text-sm mt-1">
+                {validationErrors.email}
+              </div>
+            )}
             <img
               src={mailIcon}
               alt="mail icon"
@@ -139,8 +145,15 @@ const Login = () => {
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Password"
-              className="w-full p-3 border-2 border-black rounded bg-gray-300"
+              className={`w-full p-3 border-2 ${
+                validationErrors.password ? 'border-red-500' : 'border-black'
+              } rounded bg-gray-300`}
             />
+            {validationErrors.password && (
+              <div className="text-red-500 text-sm mt-1">
+                {validationErrors.password}
+              </div>
+            )}
             <img
               src={eyeIcon}
               alt="eye icon"
@@ -156,9 +169,11 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full p-3 bg-indigo-600 text-white font-bold rounded hover:bg-indigo-700"
+            disabled={isLoading}
+            className={`w-full p-3 bg-indigo-600 text-white font-bold rounded 
+              ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700'}`}
           >
-            Login
+            {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
         <p className="mt-4 text-sm text-gray-600">

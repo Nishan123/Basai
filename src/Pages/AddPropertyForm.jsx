@@ -20,12 +20,15 @@ const AddPropertyForm = () => {
   const [activeType, setActiveType] = useState("Hotels");
   const [offerings, setOfferings] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleTypeCardClick = (typeName) => {
     setActiveType(typeName);
   };
 
-  const handleOfferClick = (offerName) => {
+  const handleOfferClick = (e, offerName) => {
+    e.preventDefault(); // Prevent form submission
     if (offerings.includes(offerName)) {
       setOfferings(offerings.filter((offer) => offer !== offerName));
     } else {
@@ -34,15 +37,84 @@ const AddPropertyForm = () => {
   };
 
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
+    const files = Array.from(event.target.files);
+    setSelectedFiles(files);
+
+    // Preview first image
+    if (files[0]) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(files[0]);
     }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+        const formData = new FormData();
+        
+        // Get form values
+        const title = e.target.title.value.trim();
+        const description = e.target.description.value.trim();
+        const location = e.target.location.value.trim();
+        const price = e.target.price.value.trim();
+
+        // Validate fields
+        if (!title || !description || !location || !price) {
+            throw new Error('Please fill in all required fields');
+        }
+
+        if (!selectedFiles.length) {
+            throw new Error('Please select at least one image');
+        }
+
+        // Append form data
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("location", location);
+        formData.append("price", price);
+        formData.append("property_type", activeType);
+        formData.append("facilities", JSON.stringify(offerings));
+
+        // Append images
+        selectedFiles.forEach((file) => {
+            formData.append("images", file);
+        });
+
+        console.log('Submitting property data...');
+
+        const response = await fetch("http://localhost:5000/properties/registerProperty", {
+            method: "POST",
+            body: formData,
+        });
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            throw new Error(responseData.error || 'Failed to upload property');
+        }
+
+        console.log('Success:', responseData);
+        alert("Property uploaded successfully!");
+        
+        // Reset form
+        e.target.reset();
+        setImagePreview(null);
+        setSelectedFiles([]);
+        setOfferings([]);
+        
+    } catch (error) {
+        console.error("Upload error:", error);
+        alert(error.message || "Failed to upload property");
+    } finally {
+        setLoading(false);
+    }
+};
+
   const offeringIcons = {
     "Family stay": <CheckCircle size={20} />,
     Parking: <Car size={20} />,
@@ -116,7 +188,7 @@ const AddPropertyForm = () => {
         {/* Form Container */}
         <div className="form-container flex gap-8 items-start">
           {/* Upload Box */}
-          <div className="upload-box w-52 h-64 border-2 border-dashed border-gray-500 rounded-lg flex justify-center items-center cursor-pointer overflow-hidden">
+          <div className="upload-box w-72 h-64 border-2 border-dashed border-gray-500 rounded-lg flex justify-center items-center cursor-pointer overflow-hidden">
             <label
               htmlFor="property-photo"
               className="cursor-pointer text-gray-600 text-5xl"
@@ -141,18 +213,25 @@ const AddPropertyForm = () => {
           </div>
 
           {/* Property Form */}
-          <div className="property-form flex-1 flex flex-col gap-3">
+          <form
+            onSubmit={handleSubmit}
+            className="property-form flex-1 flex flex-col gap-3"
+          >
             <input
+              name="title"
               type="text"
               placeholder="Property name"
               className="px-4 py-2 border border-gray-300 rounded-md text-gray-700"
+              required
             />
             <input
+              name="location"
               type="text"
               placeholder="Location"
               className="px-4 py-2 border border-gray-300 rounded-md text-gray-700"
             />
             <textarea
+              name="description"
               placeholder="Description"
               className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 resize-y min-h-[120px]"
             ></textarea>
@@ -162,12 +241,13 @@ const AddPropertyForm = () => {
               {Object.keys(offeringIcons).map((offerName) => (
                 <button
                   key={offerName}
+                  type="button" // Add this to prevent form submission
                   className={`offer flex items-center gap-2 bg-gray-200 text-gray-700 border-none py-2 px-4 rounded-md cursor-pointer text-sm transition-colors duration-300 ${
                     offerings.includes(offerName)
                       ? "bg-indigo-600 text-white hover:bg-indigo-500"
                       : "hover:bg-gray-300"
                   }`}
-                  onClick={() => handleOfferClick(offerName)}
+                  onClick={(e) => handleOfferClick(e, offerName)}
                 >
                   {offeringIcons[offerName]} {/* Render Icon Here */}
                   {offerName}
@@ -176,14 +256,19 @@ const AddPropertyForm = () => {
             </div>
 
             <input
+              name="price"
               type="text"
               placeholder="Price (per night)"
               className="px-4 py-2 border border-gray-300 rounded-md text-gray-700"
             />
-            <button className="upload-btn bg-indigo-600 text-white hover:bg-indigo-500 border-none py-3 px-6 rounded-md text-lg cursor-pointer transition-colors duration-300">
-              Upload property
+            <button
+              type="submit"
+              className="upload-btn bg-indigo-600 text-white hover:bg-indigo-500 border-none py-3 px-6 rounded-md text-lg cursor-pointer transition-colors duration-300"
+              disabled={loading}
+            >
+              {loading ? "Uploading..." : "Upload property"}
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </>

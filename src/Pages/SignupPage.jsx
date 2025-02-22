@@ -43,6 +43,8 @@ api.interceptors.response.use(
     }
 );
 
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+
 const Signup = () => {
   const images = [
     signupImage,
@@ -57,6 +59,8 @@ const Signup = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -65,9 +69,29 @@ const Signup = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
+  const validateForm = (data) => {
+    const errors = {};
+    
+    if (!data.firstName?.trim()) errors.firstName = 'First name is required';
+    if (!data.lastName?.trim()) errors.lastName = 'Last name is required';
+    if (!data.email?.trim()) errors.email = 'Email is required';
+    if (!data.email?.includes('@')) errors.email = 'Please enter a valid email';
+    if (!data.password) errors.password = 'Password is required';
+    if (!passwordRegex.test(data.password)) {
+      errors.password = 'Password must be at least 6 characters with letters and numbers';
+    }
+    if (data.password !== data.confirmPassword) {
+      errors.confirmPassword = 'Passwords do not match';
+    }
+    
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setValidationErrors({});
+    setIsLoading(true);
 
     const formData = new FormData(e.target);
     const data = {
@@ -78,69 +102,27 @@ const Signup = () => {
       confirmPassword: formData.get("confirmPassword"),
     };
 
-    console.log('Submitting form with data:', {
-      ...data,
-      password: data.password ? '****' : undefined,
-      confirmPassword: data.confirmPassword ? '****' : undefined
-    });
-
-    // Basic frontend validation
-    if (!data.firstName || !data.lastName || !data.email || !data.password) {
-      const missingFields = Object.entries(data)
-        .filter(([key, value]) => !value && key !== 'confirmPassword')
-        .map(([key]) => key);
-      setError(`Missing required fields: ${missingFields.join(', ')}`);
-      return;
-    }
-
-    if (!data.email.includes('@')) {
-      setError("Please enter a valid email address");
-      return;
-    }
-
-    if (data.password.length < 6) {
-      setError("Password must be at least 6 characters long");
-      return;
-    }
-
-    if (data.password !== data.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    if (!e.target.terms.checked) {
-      setError("Please agree to the terms and conditions");
+    // Validate form
+    const errors = validateForm(data);
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      setIsLoading(false);
       return;
     }
 
     try {
-      // Test server connection
-      try {
-        const testResponse = await api.get('/test');
-        console.log('Server test successful:', testResponse.data);
-      } catch (testError) {
-        console.error('Server test failed:', testError);
-        setError('Cannot connect to server. Please check if the backend server is running.');
-        return;
-      }
-
-      // Proceed with signup
       const response = await api.post('/users/signup', data);
       console.log('Signup successful:', response.data);
-      alert("Signup successful! Please login.");
+      alert("Account created successfully! Please login.");
       navigate("/login");
     } catch (err) {
       console.error('Signup failed:', err);
-      
-      if (!err.response) {
-        setError('Network error. Please check if the server is running.');
-      } else {
-        setError(
-          err.response?.data?.error || 
-          err.response?.data?.details || 
-          'An unexpected error occurred'
-        );
-      }
+      setError(
+        err.response?.data?.error || 
+        'Failed to create account. Please try again.'
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -190,33 +172,68 @@ const Signup = () => {
               type="text"
               name="firstName"
               placeholder="First name"
-              className="w-full p-3 border-2 border-black rounded bg-gray-300 mb-4"
+              className={`w-full p-3 border-2 ${
+                validationErrors.firstName ? 'border-red-500' : 'border-black'
+              } rounded bg-gray-300 mb-4`}
             />
+            {validationErrors.firstName && (
+              <div className="text-red-500 text-sm mb-2">
+                {validationErrors.firstName}
+              </div>
+            )}
             <input
               type="text"
               name="lastName"
               placeholder="Last name"
-              className="w-full p-3 border-2 border-black rounded bg-gray-300 mb-4"
+              className={`w-full p-3 border-2 ${
+                validationErrors.lastName ? 'border-red-500' : 'border-black'
+              } rounded bg-gray-300 mb-4`}
             />
+            {validationErrors.lastName && (
+              <div className="text-red-500 text-sm mb-2">
+                {validationErrors.lastName}
+              </div>
+            )}
           </div>
           <input
             type="email"
             name="email"
             placeholder="Email"
-            className="w-full p-3 border-2 border-black rounded bg-gray-300 mb-4"
+            className={`w-full p-3 border-2 ${
+              validationErrors.email ? 'border-red-500' : 'border-black'
+            } rounded bg-gray-300 mb-4`}
           />
+          {validationErrors.email && (
+            <div className="text-red-500 text-sm mb-2">
+              {validationErrors.email}
+            </div>
+          )}
           <input
             type="password"
             name="password"
             placeholder="Password"
-            className="w-full p-3 border-2 border-black rounded bg-gray-300 mb-4"
+            className={`w-full p-3 border-2 ${
+              validationErrors.password ? 'border-red-500' : 'border-black'
+            } rounded bg-gray-300 mb-4`}
           />
+          {validationErrors.password && (
+            <div className="text-red-500 text-sm mb-2">
+              {validationErrors.password}
+            </div>
+          )}
           <input
             type="password"
             name="confirmPassword"
             placeholder="Confirm password"
-            className="w-full p-3 border-2 border-black rounded bg-gray-300 mb-4"
+            className={`w-full p-3 border-2 ${
+              validationErrors.confirmPassword ? 'border-red-500' : 'border-black'
+            } rounded bg-gray-300 mb-4`}
           />
+          {validationErrors.confirmPassword && (
+            <div className="text-red-500 text-sm mb-2">
+              {validationErrors.confirmPassword}
+            </div>
+          )}
           <div className="flex items-center mb-4">
             <input type="checkbox" id="terms" className="mr-2" />
             <label htmlFor="terms" className="text-gray-600 text-sm">
@@ -225,9 +242,11 @@ const Signup = () => {
           </div>
           <button
             type="submit"
-            className="w-full p-3 bg-indigo-600 text-white font-bold rounded hover:bg-indigo-700"
+            disabled={isLoading}
+            className={`w-full p-3 bg-indigo-600 text-white font-bold rounded 
+              ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700'}`}
           >
-            Signup
+            {isLoading ? 'Creating Account...' : 'Signup'}
           </button>
         </form>
         <p className="mt-4 text-sm text-gray-600">
