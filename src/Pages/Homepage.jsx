@@ -30,6 +30,7 @@ const HomePage = () => {
         throw new Error('Failed to fetch properties');
       }
       const data = await response.json();
+      console.log('Property data:', data); // Add this line to debug
       setProperties(data);
     } catch (err) {
       console.error('Error fetching properties:', err);
@@ -160,8 +161,17 @@ const HomePage = () => {
               {properties.map((property) => (
                 <div key={property.property_id} className="text-center">
                   <Link 
-                    to={`/booking/${property.property_id}`} 
-                    state={property}
+                    to={`/booking/${property.owner_name}`} 
+                    state={{
+                      img: property.image[0],
+                      city: property.city,
+                      location: property.location,
+                      description: property.description,
+                      price: `Rs. ${property.price}`,
+                      title: property.title,
+                      owner: property.owner_name,
+                      facilities: property.facilities // Pass facilities directly
+                    }}
                     className="block"
                   >
                     <div className="relative w-80 h-48 mb-2">

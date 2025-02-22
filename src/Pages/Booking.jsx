@@ -1,9 +1,23 @@
 import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { FaUsers, FaParking, FaHotTub, FaCar, FaCoffee, FaUtensils, FaChild } from "react-icons/fa";
+import { FaUsers, FaParking, FaHotTub, FaCar, FaCoffee, FaUtensils, FaChild, FaWifi, FaTv, FaSwimmingPool, FaSnowflake } from "react-icons/fa";
 import Navbar from "../components/NavbarB";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+const amenityIcons = {
+  'Family stay': { icon: FaUsers, label: "Family Stay" },
+  'Taxi service': { icon: FaCar, label: "Taxi Service" },
+  'Tea / Coffee': { icon: FaCoffee, label: "Tea/Coffee Service" },
+  'Parking': { icon: FaParking, label: "Secure Parking" },
+  'Swimming pool': { icon: FaSwimmingPool, label: "Swimming Pool" },
+  'AC': { icon: FaSnowflake, label: "Air Conditioning" },
+  'TV': { icon: FaTv, label: "Smart TV" },
+  'Restaurant': { icon: FaUtensils, label: "Restaurant" },
+  'Hot tub': { icon: FaHotTub, label: "Hot Tub" },
+  'Child friendly': { icon: FaChild, label: "Child Friendly" },
+  'Wifi': { icon: FaWifi, label: "Free WiFi" }
+};
 
 const BookingPage = () => {
   const { owner } = useParams();
@@ -21,16 +35,34 @@ const BookingPage = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const parsePriceString = (priceString) => {
+    // Extract numeric value from string like "Rs 2000" or "2000"
+    const numericString = priceString.replace(/[^0-9]/g, '');
+    return parseInt(numericString) || 0;
+  };
 
   // Calculate total price when dates change
   useEffect(() => {
     if (startDate && endDate) {
       const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
-      setTotalPrice(nights * parseFloat(stay.price.replace(/[^0-9.-]+/g, "")));
+      const basePrice = parsePriceString(stay.price);
+      const calculatedTotal = nights * basePrice;
+      setTotalPrice(calculatedTotal);
     } else {
       setTotalPrice(0);
     }
   }, [dateRange, stay.price]);
+
+  // Add this useEffect to get current user from localStorage
+  useEffect(() => {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      const user = JSON.parse(userStr);
+      setCurrentUser(user);
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -61,11 +93,65 @@ const BookingPage = () => {
     const newErrors = validateForm();
     
     if (Object.keys(newErrors).length === 0) {
+      if (!currentUser) {
+        alert("Please login to make a booking");
+        return;
+      }
+
       setIsSubmitting(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      alert("Booking submitted successfully!");
-      setIsSubmitting(false);
+      try {
+        const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+        const bookingData = {
+          propertyId: parseInt(stay.id) || 1,
+          ownerId: owner,
+          guestId: currentUser.id, // Add this line
+          fullName: formData.fullName.trim(),
+          phone: formData.phone.trim(),
+          guests: parseInt(formData.guests),
+          checkIn: startDate.toISOString(),
+          checkOut: endDate.toISOString(),
+          noOfNights: nights,
+          totalPrice: parseFloat(totalPrice)
+        };
+
+        // Debug logs
+        console.log('Sending request to:', 'http://localhost:5000/api/bookings/book');
+        console.log('Request data:', bookingData);
+
+        const response = await fetch('http://localhost:5000/api/bookings/book', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(bookingData)
+        });
+
+        // Log raw response
+        const responseText = await response.text();
+        console.log('Raw response:', responseText);
+
+        // Try to parse as JSON
+        let data;
+        try {
+          data = JSON.parse(responseText);
+        } catch (error) {
+          throw new Error(`Server returned invalid JSON: ${responseText.substring(0, 100)}...`);
+        }
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Booking failed');
+        }
+
+        alert("Booking successful!");
+        setFormData({ fullName: "", phone: "", guests: "" });
+        setDateRange([null, null]);
+      } catch (error) {
+        console.error('Full booking error:', error);
+        alert(`Booking failed: ${error.message}`);
+      } finally {
+        setIsSubmitting(false);
+      }
     } else {
       setErrors(newErrors);
     }
@@ -74,6 +160,41 @@ const BookingPage = () => {
   if (!stay) {
     return <h2 className="text-center mt-20 text-xl">Stay not found!</h2>;
   }
+
+  // Add this debug log
+  useEffect(() => {
+    console.log('Stay data:', stay);
+    console.log('Facilities:', stay?.facilities);
+  }, [stay]);
+
+  const renderAmenities = () => {
+    if (!stay?.facilities || stay.facilities.length === 0) {
+      return <p className="text-gray-500">No facilities listed</p>;
+    }
+
+    return (
+      <div className="flex flex-wrap gap-4 text-blue-600">
+        {stay.facilities.map((facility, index) => {
+          const amenityConfig = amenityIcons[facility];
+          if (!amenityConfig) {
+            console.log('Unknown facility:', facility);
+            return null;
+          }
+          
+          const Icon = amenityConfig.icon;
+          return (
+            <div key={index} className="flex items-center gap-1 bg-blue-50 px-3 py-1 rounded-full">
+              <Icon className="text-blue-500" />
+              <span className="text-sm">{amenityConfig.label}</span>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  // Update the debug log
+  console.log('Stay facilities:', stay?.facilities);
 
   return (
     <>
@@ -87,9 +208,11 @@ const BookingPage = () => {
         {/* Stay Details */}
         <div className="w-3/5">
           <h1 className="text-3xl font-bold">
-            {owner}&apos;s House, <span className="text-red-500">{stay.city}</span>
+            {stay.title}
           </h1>
+          <p className="text-xl mt-2">Owner: <span className="text-blue-500">{owner}</span></p>
           <p className="text-gray-600 text-lg mt-1">📍 {stay.location}</p>
+          <p className="text-gray-600">{stay.city}</p>
 
           {/* Description Box */}
           <div className="mt-6">
@@ -97,14 +220,9 @@ const BookingPage = () => {
           </div>
 
           {/* Amenities */}
-          <div className="flex flex-wrap gap-4 mt-4 text-blue-600">
-            <div className="flex items-center gap-1"><FaUsers /> Family-Friendly Stay</div>
-            <div className="flex items-center gap-1"><FaParking /> Secure Parking Available</div>
-            <div className="flex items-center gap-1"><FaHotTub /> Relaxing Hot Tub</div>
-            <div className="flex items-center gap-1"><FaCar /> Taxi Service</div>
-            <div className="flex items-center gap-1"><FaCoffee /> Complimentary Tea/Coffee</div>
-            <div className="flex items-center gap-1"><FaUtensils /> Delicious Dining Options</div>
-            <div className="flex items-center gap-1"><FaChild /> Child-Friendly Amenities</div>
+          <div className="mt-6">
+            <h3 className="text-xl font-semibold mb-3">Available Amenities</h3>
+            {renderAmenities()}
           </div>
 
           {/* Price & Booking */}
@@ -174,12 +292,16 @@ const BookingPage = () => {
             <div className="mb-10 p-4 bg-white/10 rounded">
               <h3 className="font-semibold">Price Summary</h3>
               <div className="flex justify-between mt-2">
+                <span>Price per night:</span>
+                <span>Rs {parsePriceString(stay.price).toLocaleString('en-IN')}</span>
+              </div>
+              <div className="flex justify-between mt-2">
                 <span>Total nights:</span>
                 <span>{Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24))}</span>
               </div>
               <div className="flex justify-between mt-2 text-xl font-bold">
                 <span>Total Price:</span>
-                <span>${totalPrice}</span>
+                <span>Rs {totalPrice.toLocaleString('en-IN')}</span>
               </div>
             </div>
           )}
