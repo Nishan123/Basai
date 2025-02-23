@@ -111,14 +111,20 @@ const Signup = () => {
     }
 
     try {
-      const response = await api.post('/users/signup', data);
+      // Changed from /signup to /register to match backend
+      const response = await api.post('/users/register', data);
       console.log('Signup successful:', response.data);
-      alert("Account created successfully! Please login.");
-      navigate("/login");
+      if (response.data.success) {
+        alert("Account created successfully! Please login.");
+        navigate("/login");
+      } else {
+        setError(response.data.error || 'Failed to create account');
+      }
     } catch (err) {
       console.error('Signup failed:', err);
       setError(
         err.response?.data?.error || 
+        err.response?.data?.details?.[0] ||
         'Failed to create account. Please try again.'
       );
     } finally {

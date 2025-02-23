@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProfileComponent from '../components/ProfileNav';
 import ManageProperty from '../components/TrendingStays';
 
@@ -7,42 +8,51 @@ export const Profile = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch user profile
         const token = localStorage.getItem('token');
         if (!token) {
-          throw new Error('No authentication token found');
+          navigate('/login');
+          return;
         }
 
-        const [profileResponse, propertiesResponse] = await Promise.all([
-          fetch('http://localhost:5000/users/profile', {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            }
-          }),
-          fetch('http://localhost:5000/properties/my-properties', {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            }
-          })
-        ]);
+        const response = await fetch('http://localhost:5000/users/profile', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
 
-        if (!profileResponse.ok || !propertiesResponse.ok) {
-          throw new Error('Failed to fetch data');
+        if (!response.ok) {
+          if (response.status === 401) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            navigate('/login');
+            return;
+          }
+          throw new Error('Failed to fetch profile data');
         }
 
-        const [profileData, propertiesData] = await Promise.all([
-          profileResponse.json(),
-          propertiesResponse.json()
-        ]);
+        const data = await response.json();
+        setUserData(data);
 
-        setUserData(profileData);
-        setProperties(propertiesData);
+        // Fetch properties only if profile fetch is successful
+        const propertiesResponse = await fetch('http://localhost:5000/properties/my-properties', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (propertiesResponse.ok) {
+          const propertiesData = await propertiesResponse.json();
+          setProperties(propertiesData);
+        }
+
       } catch (err) {
         console.error('Fetch error:', err);
         setError(err.message);
@@ -52,15 +62,36 @@ export const Profile = () => {
     };
 
     fetchData();
-  }, []);
+  }, [navigate]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-screen text-red-500">
+        <div className="bg-red-100 p-4 rounded-lg">
+          {error}. Please try{' '}
+          <button 
+            onClick={() => window.location.reload()} 
+            className="text-blue-500 underline"
+          >
+            refreshing
+          </button>.
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <>
+    <div className="container mx-auto px-4 pt-20">
       <ProfileComponent userData={userData} />
       <ManageProperty properties={properties} />
-    </>
+    </div>
   );
 };
