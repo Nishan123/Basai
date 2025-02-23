@@ -15,7 +15,7 @@ const ProfileNavbar = ({ userData }) => {
   const { user } = userData;  // Extract user data from the response
 
   return (
-    <div className="bg-[#001A72] text-white flex items-center pt-0 pl-20">
+    <div className="bg-[#001A72]  text-white flex items-center pt-0 pl-15">
       {/* Navbar */}
       <div className="fixed top-0 left-0 w-full flex justify-around items-center px-20 py-4 bg-[#001A72] text-white z-50">
         <div className="flex items-center">
