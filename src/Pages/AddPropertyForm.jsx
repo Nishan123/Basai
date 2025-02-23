@@ -57,6 +57,13 @@ const AddPropertyForm = () => {
     try {
         const formData = new FormData();
         
+        // Get token from localStorage
+        const token = localStorage.getItem('token');
+        if (!token) {
+            toast.error('Please login first');
+            return;
+        }
+
         // Get form values
         const title = e.target.title.value.trim();
         const description = e.target.description.value.trim();
@@ -91,6 +98,9 @@ const AddPropertyForm = () => {
 
         const response = await fetch("http://localhost:5000/properties/registerProperty", {
             method: "POST",
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
             body: formData,
         });
 

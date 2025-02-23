@@ -38,6 +38,7 @@ export const Profile = () => {
         }
 
         const data = await response.json();
+        console.log('Profile data received:', data); // Add this line for debugging
         setUserData(data);
 
         // Fetch properties only if profile fetch is successful
@@ -90,8 +91,8 @@ export const Profile = () => {
 
   return (
     <div className="container mx-auto px-4 pt-20">
-      <ProfileComponent userData={userData} />
-      <ManageProperty properties={properties} />
+      {userData?.user ? <ProfileComponent userData={userData} /> : null}
+      {properties.length > 0 && <ManageProperty properties={properties} />}
     </div>
   );
 };

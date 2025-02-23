@@ -8,9 +8,11 @@ import ProfileModal from "./ProfileModel";
 const ProfileNavbar = ({ userData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!userData) {
+  if (!userData || !userData.user) {
     return <div>Loading...</div>;
   }
+
+  const { user } = userData;  // Extract user data from the response
 
   return (
     <div className="bg-[#001A72] text-white flex items-center pt-0 pl-20">
@@ -32,8 +34,8 @@ const ProfileNavbar = ({ userData }) => {
               className="h-8 w-8 rounded-full border-2 border-red-500"
             />
             <div>
-              <p className="text-sm font-semibold">{`${userData.firstName} ${userData.lastName}`}</p>
-              <p className="text-xs">{userData.email}</p>
+              <p className="text-sm font-semibold">{`${user.firstName} ${user.lastName}`}</p>
+              <p className="text-xs">{user.email}</p>
             </div>
           </div>
         </div>
@@ -46,9 +48,9 @@ const ProfileNavbar = ({ userData }) => {
           alt="Profile"
           className="h-32 w-32 rounded-full border-4 border-red-500"
         />
-        <h2 className="text-2xl font-bold mt-2">Hi, {`${userData.firstName} ${userData.lastName}`}</h2>
-        <p className="text-lg">{userData.email}</p>
-        <p className="text-sm text-gray-300">Member since: {new Date(userData.createdAt).toLocaleDateString()}</p>
+        <h2 className="text-2xl font-bold mt-2">Hi, {`${user.firstName} ${user.lastName}`}</h2>
+        <p className="text-lg">{user.email}</p>
+        <p className="text-sm text-gray-300">Member since: {new Date(user.createdAt).toLocaleDateString()}</p>
         <button
           className="mt-2 px-4 py-1 bg-white text-[#001A72] rounded"
           onClick={() => setIsModalOpen(true)}
