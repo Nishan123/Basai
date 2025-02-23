@@ -53,9 +53,11 @@ const Navbar = () => {
               {user ? (
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-white text-[#001A72] flex items-center justify-center font-bold cursor-pointer">
-                      {getInitials(user.firstName, user.lastName)}
-                    </div>
+                    <Link to="/profile" className="flex items-center space-x-2">
+                      <div className="w-10 h-10 rounded-full bg-white text-[#001A72] flex items-center justify-center font-bold cursor-pointer">
+                        {getInitials(user.firstName, user.lastName)}
+                      </div>
+                    </Link>
                     <div className="ml-3 text-white">
                       <div className="font-semibold">{user.firstName} {user.lastName}</div>
                       <div className="text-sm text-gray-300">{user.email}</div>

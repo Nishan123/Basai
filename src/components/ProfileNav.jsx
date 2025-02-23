@@ -4,8 +4,13 @@ import basaiIcon from "../assets/basaiIcon.png";
 import profilePic from "../assets/Profile.jpeg";
 import ProfileModal from "./ProfileModel";
 
-const ProfileNavbar = () => {
+// eslint-disable-next-line react/prop-types
+const ProfileNavbar = ({ userData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="bg-[#001A72] text-white flex items-center pt-0 pl-20">
@@ -14,7 +19,7 @@ const ProfileNavbar = () => {
         <div className="flex items-center">
           <Link to="/">
             <img src={basaiIcon} alt="Basai Logo" className="h-10" />
-          </Link>{" "}
+          </Link>
         </div>
         <div className="flex items-center space-x-4">
           <Link to="/addproperty" className="text-white">
@@ -27,8 +32,8 @@ const ProfileNavbar = () => {
               className="h-8 w-8 rounded-full border-2 border-red-500"
             />
             <div>
-              <p className="text-sm font-semibold">Nishan Giri</p>
-              <p className="text-xs">girinishan200@gmail.com</p>
+              <p className="text-sm font-semibold">{`${userData.firstName} ${userData.lastName}`}</p>
+              <p className="text-xs">{userData.email}</p>
             </div>
           </div>
         </div>
@@ -41,8 +46,9 @@ const ProfileNavbar = () => {
           alt="Profile"
           className="h-32 w-32 rounded-full border-4 border-red-500"
         />
-        <h2 className="text-2xl font-bold mt-2">Hi, Nishan Giri</h2>
-        <p className="text-lg">girinishan200@gmail.com</p>
+        <h2 className="text-2xl font-bold mt-2">Hi, {`${userData.firstName} ${userData.lastName}`}</h2>
+        <p className="text-lg">{userData.email}</p>
+        <p className="text-sm text-gray-300">Member since: {new Date(userData.createdAt).toLocaleDateString()}</p>
         <button
           className="mt-2 px-4 py-1 bg-white text-[#001A72] rounded"
           onClick={() => setIsModalOpen(true)}
@@ -55,6 +61,7 @@ const ProfileNavbar = () => {
       <ProfileModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        userData={userData}
       />
     </div>
   );
