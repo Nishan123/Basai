@@ -8,6 +8,8 @@ import mailIcon from "../assets/icon/mail-142.png";
 import eyeIcon from "../assets/icon/eye-12111.png";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Configure axios
 const api = axios.create({
@@ -77,10 +79,11 @@ const Login = () => {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       
+      toast.success('Login successful!');
       navigate("/");
     } catch (err) {
       console.error('Login failed:', err);
-      setError(
+      toast.error(
         err.response?.data?.error || 
         'Login failed. Please check your credentials.'
       );
@@ -91,6 +94,18 @@ const Login = () => {
 
   return (
     <div className="flex h-screen font-sans mx-12 gap-9 mr-7 ml-7 mt-4">
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="relative flex-1 overflow-hidden rounded-2xl">
         <img
           src={basaiIcon}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import basaiIcon from "../assets/basaiIcon.png";
+import { FaBell } from 'react-icons/fa';
 
 const Navbar = () => {
   const [selectedLink, setSelectedLink] = useState(null);
@@ -49,6 +50,12 @@ const Navbar = () => {
               <Link to="/addproperty" className="text-white">
                 List your property
               </Link>
+              
+              {user && (
+                <Link to="/notifications" className="text-white relative">
+                  <FaBell className="text-2xl hover:text-blue-200 transition-colors" />
+                </Link>
+              )}
               
               {user ? (
                 <div className="flex items-center space-x-3">

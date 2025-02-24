@@ -5,6 +5,8 @@ import prashantImage from "../assets/prashant.jpeg";
 import sushim1Image from "../assets/sushim1.jpeg";
 import basaiIcon from "../assets/basaiIcon.png";
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Configure axios with better error handling
 const api = axios.create({
@@ -115,14 +117,14 @@ const Signup = () => {
       const response = await api.post('/users/register', data);
       console.log('Signup successful:', response.data);
       if (response.data.success) {
-        alert("Account created successfully! Please login.");
+        toast.success("Account created successfully! Please login.");
         navigate("/login");
       } else {
-        setError(response.data.error || 'Failed to create account');
+        toast.error(response.data.error || 'Failed to create account');
       }
     } catch (err) {
       console.error('Signup failed:', err);
-      setError(
+      toast.error(
         err.response?.data?.error || 
         err.response?.data?.details?.[0] ||
         'Failed to create account. Please try again.'
@@ -134,6 +136,18 @@ const Signup = () => {
 
   return (
     <div className="flex h-screen m-5 font-sans mx-12 gap-6">
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       {/* Left Container */}
       <div className="relative flex-1 overflow-hidden rounded-2xl">
         <img

@@ -4,6 +4,8 @@ import { FaUsers, FaParking, FaHotTub, FaCar, FaCoffee, FaUtensils, FaChild, FaW
 import Navbar from "../components/NavbarB";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const amenityIcons = {
   'Family stay': { icon: FaUsers, label: "Family Stay" },
@@ -94,7 +96,7 @@ const BookingPage = () => {
     
     if (Object.keys(newErrors).length === 0) {
       if (!currentUser) {
-        alert("Please login to make a booking");
+        toast.error("Please login to make a booking");
         return;
       }
 
@@ -143,12 +145,12 @@ const BookingPage = () => {
           throw new Error(data.message || 'Booking failed');
         }
 
-        alert("Booking successful!");
+        toast.success("Booking successful!");
         setFormData({ fullName: "", phone: "", guests: "" });
         setDateRange([null, null]);
       } catch (error) {
         console.error('Full booking error:', error);
-        alert(`Booking failed: ${error.message}`);
+        toast.error(`Booking failed: ${error.message}`);
       } finally {
         setIsSubmitting(false);
       }
@@ -199,6 +201,18 @@ const BookingPage = () => {
   return (
     <>
     <Navbar/>
+    <ToastContainer 
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"
+    />
     <div className="p-10 mx-auto w-4/5 mt-35">
       {/* Stay Info */}
       <div className="flex gap-10">

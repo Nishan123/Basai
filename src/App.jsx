@@ -7,6 +7,7 @@ import AddPropertyForm from './Pages/AddPropertyForm';
 import BookingPage from './Pages/Booking';
 import NotFound from './Pages/NotFound';
 import { Profile } from './Pages/Profile';
+import NotificationsPage from './Pages/NotificationsPage';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/booking/:owner" element={<BookingPage />} />
         <Route path="/notFound" element={<NotFound />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
       </Routes>
   );
 };
